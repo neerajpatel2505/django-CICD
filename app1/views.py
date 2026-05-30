@@ -93,9 +93,53 @@ def home1(req):
 #                                        "hobbies": ["coding","playing","travelling"]})
 
 def landing(req):
-    user = [{
-        "name":"Neeraj",
-        "email": "neeraj@example.com",
-        "hobbies": ["coding","playing","travelling"]
-    }]
+    user = [
+        {"name":"Neeraj",
+            "email": "neeraj@example.com",
+            "hobbies": ["coding","playing","travelling"]
+        }]
     return render(req,'landing.html', {"user": user})
+
+
+# { key : [{"name":"Neeraj","email": "neeraj@example.com","hobbies": ["coding","playing","travelling"]},{"name":"Neeraj","email": "neeraj@example.com","hobbies": ["coding","playing","travelling"]}] }
+
+# { key : [ value1, value2]}
+
+# for i in [value1, value2]:
+#     print(i)
+
+# output value1
+#        value2
+
+def my_json_response(req):
+    # recomended to return dict object in JsonResponse
+    # data = {'name': "Neeraj", "age": 37, 'hobbies': ['coding', 'playing', 'travelling'],'x':True,'y':False,'z':None}
+    # return JsonResponse(data)
+
+    ## list_of_dict = [{},{},{},...........]
+    data = [{'name': "Neeraj", "age": 37, 'hobbies': ['coding', 'playing', 'travelling']},{'name':"Rahul","age": 25, 'hobbies': ['reading', 'swimming']}]
+    return JsonResponse(data, safe=False)
+
+    # data = 10
+    # return JsonResponse(data,safe=False) #In order to allow non-dict objects to be serialized set the safe parameter to False.
+
+    # data = "Python language"
+    # return JsonResponse(data,safe=False)
+    
+    # data = ['Python','Java','C++','JavaScript']
+    # return JsonResponse(data,safe=False)
+    
+    # data = ('Python','Java','C++','JavaScript')
+    # return JsonResponse(data,safe=False)
+
+    ## Object of type set is not JSON serializable (Due to unordered collection)
+    # data = {'Python','Java','C++','JavaScript'}
+    # return JsonResponse(data,safe=False)
+    
+    ## Object of type frozenset is not JSON serializable (Due to unordered collection)
+    # data = frozenset({'Python','Java','C++','JavaScript'})
+    # return JsonResponse(data,safe=False)
+    
+    # return JsonResponse({'name': True, "age": False, '''hobbies''': None})
+
+

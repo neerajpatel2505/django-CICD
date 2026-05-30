@@ -29,5 +29,6 @@ urlpatterns = [
     # path('home/', views.home, name='home') # recommended from app1 import views
     path('home/', home, name='home'), # recommended from app1.views import home
     path("home1/",home1,name="home1"),
-    path('',landing,name="landing")
+    path('landing/',landing,name="landing"),
+    path("my_json_response/",my_json_response,name="my_json_response")
 ]
